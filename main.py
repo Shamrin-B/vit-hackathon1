@@ -5,6 +5,19 @@ from pydantic import BaseModel
 from market_monitor import MarketMonitor
 from decision_engine import DecisionEngine, DCAStrategy
 from vault_manager import VaultManager
+from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
+
+app = FastAPI()
+
+# Allow frontend to receive data across the network
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 app = FastAPI(title="DCA Engine Keeper")
 
